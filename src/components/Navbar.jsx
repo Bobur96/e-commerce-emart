@@ -3,13 +3,19 @@ import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+
   const state = useSelector((state) => state.handleCart)
+
+  const logOut = () => {
+    localStorage.setItem("user", "");
+  };
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
-        <div className="container">
-          <NavLink className="navbar-brand fw-bold fs-4" to='#'>LA COLLECTION</NavLink>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white py-2 shadow-sm ">
+        <div className="w-100 d-lg-flex px-4">
+          <NavLink className="navbar-brand text-primary fw-bold fs-4" to='/'>LA COLLECTION</NavLink>
+          <button className="navbar-toggler float-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,9 +34,39 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="buttons">
-              <NavLink to='/login' className='btn btn-outline-dark'><i className="fa fa-sign-in" aria-hidden="true"></i> Login</NavLink>
-              <NavLink to='/register' className='btn btn-outline-dark ms-2'><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink>
-              <NavLink to='/cart' className='btn btn-outline-dark ms-2'><i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart ({state.length})</NavLink>
+              <NavLink to='/cart' className='ms-2 me-4 text-primary position-relative'><i className="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {state.length}<span className="visually-hidden">unread messages</span>
+                </span>
+              </NavLink>
+            </div>
+            <div className="dropdown">
+              <a
+                className="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#" id="navbarDropdownMenuAvatar" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+              >
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  className="rounded-circle" height="35"
+                  alt="Black and White Portrait of a Man" loading="lazy"
+                />
+              </a>
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                <li>
+                  <NavLink className="dropdown-item" to="/profile"><i className="fa fa-user me-1" aria-hidden="true"></i> My profile</NavLink>
+                </li>
+                <li>
+                  <NavLink className="dropdown-item" to="/setting"><i className="fa fa-cog me-1" aria-hidden="true"></i> Settings</NavLink>
+                </li>
+                <li>
+                  {!localStorage.getItem('user') && <NavLink to='/login' className="dropdown-item"><i className="fa fa-sign-in me-1" aria-hidden="true"></i> Login</NavLink>}
+                </li>
+                <li>
+                  {/* <NavLink to='/register' className="dropdown-item"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink> */}
+                  {localStorage.getItem('user') && <span className="dropdown-item" onClick={logOut} style={{ cursor: "pointer" }}><i className="fa fa-sign-out me-1" aria-hidden="true"></i> Logout</span>}
+                </li>
+              </ul>
             </div>
           </div>
         </div>

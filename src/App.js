@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import About from './components/About';
 import Cart from './components/Cart';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
@@ -14,6 +15,7 @@ function App() {
         <Route exact path='/products' element={<Products/>}/>
         <Route exact path='/products/:id' element={<Product/>}/>
         <Route exact path='/cart' element={<Cart/>}/>
+        <Route exact path='/about' element={<About/>}/>
       </Routes>
     </div>
   );
