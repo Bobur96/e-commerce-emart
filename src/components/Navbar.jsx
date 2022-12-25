@@ -8,6 +8,7 @@ const Navbar = () => {
 
   const logOut = () => {
     localStorage.setItem("user", "");
+    localStorage.setItem("prod", "");
   };
 
   return (
@@ -36,14 +37,14 @@ const Navbar = () => {
             <div className="buttons">
               <NavLink to='/cart' className='ms-2 me-4 text-primary position-relative'><i className="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {state.length}<span className="visually-hidden">unread messages</span>
+                  {state.length}
                 </span>
               </NavLink>
             </div>
             <div className="dropdown">
               <a
                 className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                href="#" id="navbarDropdownMenuAvatar" role="button"
+                id="navbarDropdownMenuAvatar" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false"
               >
                 <img

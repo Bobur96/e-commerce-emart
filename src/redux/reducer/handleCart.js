@@ -28,6 +28,11 @@ const handleCart = (state = cart, action) => {
             }
             break;
 
+        case "REMOVE":
+            const exist2 = state.find((x) => x.id === product.id)
+            return state.filter((x) => x.id !== exist2.id)
+            break;
+
         default: return state;
             break;
     }

@@ -11,3 +11,10 @@ export const delCart = (product) => {
         payload: product
     }
 }
+
+export const clearCard = (product) => {
+    return{
+        type: "REMOVE",
+        payload: product
+    }
+}

@@ -1,20 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { delCart, addCart } from '../redux/action/index'
+import { delCart, addCart, clearCard } from '../redux/action'
 
 const Cart = () => {
-  const state = useSelector((state) => state.handleCart)
+  let state = useSelector((state) => state.handleCart)
   const dispatch = useDispatch()
-  const [products, setProducts] = useState(state)
 
-  const handleButton = (product) => {
-    // products.map(x => {
-    //   x.id === product.id ? x.qty += 1 : x.qty;
-    // })
+  // useEffect(()=> {
+  //   if (localStorage.getItem("prod")) {
+  //     let locObj = localStorage.getItem("prod");
+  //     state = JSON.parse(locObj)
+  //   } 
+  //   console.log(state);
+  // }, [])
+
+  // useEffect(()=>{
+  //   localStorage.setItem("prod", JSON.stringify(state));
+  // }, [state])
+
+  const handleAdd = (item) => {
+    dispatch(addCart(item))
   }
 
-  const handleClose = (item) => {
+  const handleDel = (item) => {
     dispatch(delCart(item))
+  }
+  
+  const handleClose = (item) => {
+    dispatch(clearCard(item))
   }
 
   const cartItems = (product) => {
@@ -29,8 +42,8 @@ const Cart = () => {
             <div className="col-md-4">
               <h3>{product.title}</h3>
               <p className='lead fw-bold'>{product.qty} X ${product.price} = ${product.qty * product.price}</p>
-              <button className="btn btn-outline-dark me-4" onClick={() => handleButton(product)}><i className="fa fa-minus"></i></button>
-              <button className="btn btn-outline-dark" onClick={() => handleButton(product)}><i className="fa fa-plus"></i></button>
+              <button className="btn btn-outline-dark me-4" onClick={() => handleDel(product)}><i className="fa fa-minus"></i></button>
+              <button className="btn btn-outline-dark" onClick={() => handleAdd(product)}><i className="fa fa-plus"></i></button>
             </div>
           </div>
         </div>
