@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { delCart, addCart, clearCard } from '../redux/action'
 
 const Cart = () => {
@@ -67,6 +68,7 @@ const Cart = () => {
     <>
       {state.length === 0 && emptyCart()}
       {state.length !== 0 && state.map(cartItems)}
+      {state.length !== 0 && <div className='w-100 text-center pb-5'><Link to="/checkout" className='btn btn-outline-primary px-5'>Procces to Checkout</Link></div>}
     </>
   )
 }

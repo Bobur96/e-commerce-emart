@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Login from './Login'
 
 const Navbar = () => {
 
@@ -41,34 +42,38 @@ const Navbar = () => {
                 </span>
               </NavLink>
             </div>
-            <div className="dropdown">
-              <a
-                className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                id="navbarDropdownMenuAvatar" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-              >
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  className="rounded-circle" height="35"
-                  alt="Black and White Portrait of a Man" loading="lazy"
-                />
-              </a>
-              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                <li>
-                  <NavLink className="dropdown-item" to="/profile"><i className="fa fa-user me-1" aria-hidden="true"></i> My profile</NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/setting"><i className="fa fa-cog me-1" aria-hidden="true"></i> Settings</NavLink>
-                </li>
-                <li>
-                  {!localStorage.getItem('user') && <NavLink to='/login' className="dropdown-item"><i className="fa fa-sign-in me-1" aria-hidden="true"></i> Login</NavLink>}
-                </li>
-                <li>
-                  {/* <NavLink to='/register' className="dropdown-item"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink> */}
-                  {localStorage.getItem('user') && <span className="dropdown-item" onClick={logOut} style={{ cursor: "pointer" }}><i className="fa fa-sign-out me-1" aria-hidden="true"></i> Logout</span>}
-                </li>
-              </ul>
-            </div>
+            {localStorage.getItem("user") ? (
+              <div className="dropdown">
+                <a
+                  className="dropdown-toggle d-flex align-items-center hidden-arrow"
+                  id="navbarDropdownMenuAvatar" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    className="rounded-circle" height="35"
+                    alt="Black and White Portrait of a Man" loading="lazy"
+                  />
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                  <li>
+                    <NavLink className="dropdown-item" to="/profile"><i className="fa fa-user me-1" aria-hidden="true"></i> My profile</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="/setting"><i className="fa fa-cog me-1" aria-hidden="true"></i> Settings</NavLink>
+                  </li>
+                  <li>
+                    {!localStorage.getItem('user') && <NavLink to='/login' className="dropdown-item"><i className="fa fa-sign-in me-1" aria-hidden="true"></i> Login</NavLink>}
+                  </li>
+                  <li>
+                    {/* <NavLink to='/register' className="dropdown-item"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink> */}
+                    {localStorage.getItem('user') && <span className="dropdown-item" onClick={logOut} style={{ cursor: "pointer" }}><i className="fa fa-sign-out me-1" aria-hidden="true"></i> Logout</span>}
+                  </li>
+                </ul>
+              </div>
+            ) : (<Login />)}
+
+
           </div>
         </div>
       </nav>
